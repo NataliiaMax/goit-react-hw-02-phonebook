@@ -27,12 +27,6 @@ class App extends React.Component {
     }));
   };
 
-  showForm = () => {
-    this.setState({
-      isAddFormShow: true,
-    });
-  };
-
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
