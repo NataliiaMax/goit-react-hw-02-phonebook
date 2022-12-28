@@ -16,20 +16,40 @@ class App extends React.Component {
       id: nanoid(),
     };
     this.setState(prevState => ({
-      users: [...prevState.users, newUser],
+      contacts: [...prevState.contacts, newUser],
       isAddFormShow: false,
     }));
   };
 
+  deleteUser = userId => {
+    this.setState(prevSate => ({
+      contacts: prevSate.contacts.filter(({ id }) => id !== userId),
+    }));
+  };
+
+  showForm = () => {
+    this.setState({
+      isAddFormShow: true,
+    });
+  };
+
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value });
+  };
 
   render() {
+    const { filter } = this.state;
+    const visibleFilter = this.state.contacts.filter(contact => {return(
+       contact.text.toLowerCase().includes(this.state.filter.toLowerCase())
+    )
+    });
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm addUser={this.addUser} />
         <h2>Contacts</h2>
-        <Filter />
-        <ContactList contacts={this.contacts} />
+        <Filter value={filter} onChange={this.changeFilter} />
+        <ContactList contacts={visibleFilter} deleteUser={this.deleteUser} />
       </div>
     );
   }

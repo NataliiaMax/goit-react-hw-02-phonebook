@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import style from './AddForm.module.css';
+import PropTypes from 'prop-types';
 
 class ContactForm extends React.Component {
   state = {
@@ -15,7 +15,7 @@ class ContactForm extends React.Component {
       name: '',
       number: '',
     };
-    this.reset()
+    this.reset();
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -24,10 +24,9 @@ class ContactForm extends React.Component {
     });
   };
 
-  reset = ()=>{
-    this.setState ={name: '',
-    number: '',}}
-  
+  reset = () => {
+    this.setState = { name: '', number: '' };
+  };
 
   render() {
     const { name, number } = this.state;
@@ -65,7 +64,7 @@ class ContactForm extends React.Component {
       </form>
     );
   }
-  }
+}
 
 ContactForm.propTypes = {
   name: PropTypes.string.isRequired,
