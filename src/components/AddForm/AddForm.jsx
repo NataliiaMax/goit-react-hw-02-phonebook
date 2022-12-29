@@ -7,14 +7,17 @@ class ContactForm extends React.Component {
     number: '',
   };
 
-  clickSubmit = event => {
-    event.PreventDefault();
-    this.props.addUser({ ...this.state });
-    this.setState = {
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.addUser(this.state);
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({
       name: '',
       number: '',
-    };
-    this.reset();
+    });
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -23,16 +26,13 @@ class ContactForm extends React.Component {
     });
   };
 
-  reset = () => {
-    this.setState = { name: '', number: '' };
-  };
-
   render() {
     const { name, number } = this.state;
     return (
-      <form className={style.form} onSubmit={this.clickSubmit}>
+      <form onSubmit={this.handleSubmit}>
+        <div className={style.containerInput}>
         <label className={style.formLabel}>
-          Name:
+          Name
           <input
             className={style.formInput}
             value={name}
@@ -45,7 +45,7 @@ class ContactForm extends React.Component {
           />
         </label>
         <label className={style.formLabel}>
-          Number:
+          Number
           <input
             className={style.formInput}
             type="tel"
@@ -57,6 +57,7 @@ class ContactForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
+        </div>
         <button type="submit" className={style.buttonForm}>
           Add contact
         </button>
